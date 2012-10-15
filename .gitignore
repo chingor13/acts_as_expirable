@@ -7,5 +7,7 @@
 # Ignore bundler config
 /.bundle
 
+Gemfile.lock
+
 *.swp
 *.DS_Store
