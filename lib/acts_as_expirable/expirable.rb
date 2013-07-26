@@ -3,7 +3,7 @@ module ActsAsExpirable
     base.extend(ClassMethods)
   end
 
-  def self.cleanup
+  def self.cleanup!
     expirable_classes.each do |klass|
       klass.unscoped.destroy_expired
     end

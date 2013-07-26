@@ -9,8 +9,9 @@ Gem::Specification.new do |gem|
   gem.summary = "Basic expiry for Rails."
   gem.email = %q{ching.jeff@gmail.com}
   gem.homepage = 'http://github.com/chingor13/acts_as_expirable'
+  gem.license = 'MIT'
 
-  gem.add_runtime_dependency 'rails', '~> 3.0'
+  gem.add_runtime_dependency 'rails', '>= 3.0'
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'mysql2', '~> 0.3.7'
 
