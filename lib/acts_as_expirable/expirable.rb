@@ -28,8 +28,8 @@ module ActsAsExpirable
       class_eval %{
         include ActsAsExpirable::InstanceMethods
 
-        scope :expired, where('#{configuration[:column]} <= UTC_TIMESTAMP()')
-        scope :unexpired, where('#{configuration[:column]} IS NULL OR #{configuration[:column]} > UTC_TIMESTAMP()')
+        scope :expired, -> { where('#{configuration[:column]} <= UTC_TIMESTAMP()') }
+        scope :unexpired, -> { where('#{configuration[:column]} IS NULL OR #{configuration[:column]} > UTC_TIMESTAMP()') }
 
         class << self
           def expiry_column
