@@ -1,7 +1,9 @@
 Acts As Expirable
 =================
 
-# Usage
+`acts_as_expirable` is an ActiveRecord mixin that enables simple handling of expiring records. It gives you `expired` and `unexpired` scopes as well as global handling of all expirable classes.
+
+## Usage
 
 ```
 class SomeModel < ActiveRecord::Base
