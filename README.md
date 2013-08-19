@@ -17,7 +17,7 @@ To add configuration options, simply add a Hash of options to the `acts_as_expir
 
 ```
 ...
-acts_as_expirable column: 'some_timestamp', default: -> { Time.now + 1.day }
+acts_as_expirable column: 'some_timestamp', default: ->(r) { Time.now + 1.day }
 ```
 
 ### Options

@@ -16,8 +16,8 @@ module ActsAsExpirable
     included do
       ActsAsExpirable.register_expirable(self)
       class_attribute :acts_as_expirable_configuration
-      scope :expired, -> { where('#{acts_as_expirable_configuration[:column]} <= UTC_TIMESTAMP()') }
-      scope :unexpired, -> { where('#{acts_as_expirable_configuration[:column]} IS NULL OR #{acts_as_expirable_configuration[:column]} > UTC_TIMESTAMP()') }
+      scope :expired, -> { where(["#{acts_as_expirable_configuration[:column]} <= ?", Time.now]) }
+      scope :unexpired, -> { where(["#{acts_as_expirable_configuration[:column]} IS NULL OR #{acts_as_expirable_configuration[:column]} > ?", Time.now]) }
       delegate :expiry_column, to: :class
       before_validation :set_expiry_default, on: :create
     end
@@ -33,10 +33,6 @@ module ActsAsExpirable
 
       def delete_expired
         expired.delete_all
-      end
-
-      def default_scope
-        unexpired
       end
     end
 
