@@ -17,7 +17,10 @@ To add configuration options, simply add a Hash of options to the `acts_as_expir
 
 ```
 ...
-acts_as_expirable column: 'some_timestamp'
+acts_as_expirable column: 'some_timestamp', default: -> { Time.now + 1.day }
 ```
 
-Currently, the only option is for `column`: the name of the ORM's field that you want to treat as the expiry time.
+### Options
+
+* `column` - the name of the ORM's field that you want to treat as the expiry time.
+* `default` - a default value to set on create if the expiry field is not yet set. Can be a value or a proc, yielding the record instance.
