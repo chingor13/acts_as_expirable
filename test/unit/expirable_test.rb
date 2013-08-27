@@ -33,11 +33,11 @@ class ExpirableTest < Test::Unit::TestCase
     assert (Time.now.to_i + 1.day) - token.good_until.to_i <= 1, "should be set to nowish"
   end
 
-  def test_expired
+  def test_expired_scope
     assert_equal(1, ExpirableName.expired.count)
   end
 
-  def test_unexpired
+  def test_unexpired_scope
     assert_equal(2, ExpirableName.unexpired.count)
   end
 

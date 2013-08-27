@@ -18,7 +18,6 @@ module ActsAsExpirable
       class_attribute :acts_as_expirable_configuration
       scope :expired, -> { where(["#{acts_as_expirable_configuration[:column]} <= ?", Time.now]) }
       scope :unexpired, -> { where(["#{acts_as_expirable_configuration[:column]} IS NULL OR #{acts_as_expirable_configuration[:column]} > ?", Time.now]) }
-      delegate :expiry_column, to: :class
       before_validation :set_expiry_default, on: :create
     end
 
@@ -36,16 +35,20 @@ module ActsAsExpirable
       end
     end
 
+    def expiry_column
+      self.class.expiry_column
+    end
+
     def expire
-      write_attribute(self.class.expiry_column, Time.now)
+      write_attribute(expiry_column, Time.now)
     end
 
     def expire!
-      update_attribute(self.class.expiry_column, Time.now)
+      update_attribute(expiry_column, Time.now)
     end
 
     def expired?
-      expire_time = read_attribute(self.class.expiry_column)
+      expire_time = read_attribute(expiry_column)
       return false if expire_time.nil?
       expire_time <= Time.now
     end
